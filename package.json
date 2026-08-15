@@ -1,15 +1,26 @@
 {
   "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/package.json",
   "name": "@egorhenek/connector-yandex",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Logto connector for Yandex OAuth",
   "repository": "https://github.com/EgorHenek/logto-connector-yandex",
   "main": "./lib/index.js",
   "module": "./lib/index.js",
   "exports": "./lib/index.js",
   "type": "module",
-  "files": ["lib", "README.md", "CHANGELOG.md", "logo.svg", "logo-dark.svg"],
-  "keywords": ["logto", "connector", "yandex", "oauth"],
+  "files": [
+    "lib",
+    "README.md",
+    "CHANGELOG.md",
+    "logo.svg",
+    "logo-dark.svg"
+  ],
+  "keywords": [
+    "logto",
+    "connector",
+    "yandex",
+    "oauth"
+  ],
   "author": "EgorHenek",
   "license": "MIT",
   "scripts": {

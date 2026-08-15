@@ -1,13 +1,24 @@
 {
   "name": "@egorhenek/connector-yandex",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Logto connector for Yandex OAuth",
   "main": "./lib/index.js",
   "module": "./lib/index.js",
   "exports": "./lib/index.js",
   "type": "module",
-  "files": ["lib", "README.md", "CHANGELOG.md", "logo.svg", "logo-dark.svg"],
-  "keywords": ["logto", "connector", "yandex", "oauth"],
+  "files": [
+    "lib",
+    "README.md",
+    "CHANGELOG.md",
+    "logo.svg",
+    "logo-dark.svg"
+  ],
+  "keywords": [
+    "logto",
+    "connector",
+    "yandex",
+    "oauth"
+  ],
   "author": "EgorHenek",
   "license": "MIT",
   "scripts": {

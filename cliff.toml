@@ -1,0 +1,59 @@
+# Конфигурация git-cliff: https://git-cliff.org/docs/configuration
+
+[changelog]
+header = """
+# Changelog
+
+История изменений коннектора Yandex для Logto.
+"""
+body = """
+{% macro remote_url() -%}
+https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
+{%- endmacro %}
+
+{% if version %}## {{ version }}{% else %}## Unreleased{% endif %}
+
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | trim }}
+
+{% for commit in commits %}
+- {% if commit.remote.pr_title %}{{ commit.remote.pr_title | trim }}{% else %}{{ commit.message | split(pat="\\n") | first | trim }}{% endif %}{% if commit.remote.username %} by @{{ commit.remote.username }}{% endif %}{% if commit.remote.pr_number %} ([#{{ commit.remote.pr_number }}]({{ self::remote_url() }}/pull/{{ commit.remote.pr_number }})){% endif %}
+{% endfor %}
+{% endfor %}
+
+{% if previous.version %}[Полная история изменений]({{ self::remote_url() }}/compare/{{ previous.version }}...{{ version }}){% endif %}
+"""
+trim = true
+footer = """
+
+---
+
+Сгенерировано автоматически с помощью git-cliff.
+"""
+
+[bump]
+# Базовая версия до появления первого тега.
+initial_tag = "v1.0.0"
+
+[git]
+# Коммиты группируются по Conventional Commits.
+conventional_commits = true
+filter_unconventional = false
+filter_commits = false
+split_commits = false
+sort_commits = "newest"
+tag_pattern = "v[0-9].*"
+
+commit_parsers = [
+  { message = "^feat", group = "Новые возможности" },
+  { message = "^fix", group = "Исправления" },
+  { message = "^docs", group = "Документация" },
+  { message = "^refactor", group = "Рефакторинг" },
+  { message = "^perf", group = "Производительность" },
+  { message = "^test", group = "Тесты" },
+  { message = "^(build|ci)", group = "Сборка и CI" },
+  { message = "^revert", group = "Откаты" },
+  { message = "^chore\\(release\\)", skip = true },
+  { message = "^chore", group = "Прочее" },
+  { message = ".*", group = "Прочее" },
+]
